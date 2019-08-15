@@ -42,6 +42,22 @@ namespace TWTools
             Catapult = 0;
             Ram = 0;
         }
+
+        public void Display()
+        {
+            Console.WriteLine("Pinierzy: " + Spear);
+            Console.WriteLine("Miecznicy: " + Sword);
+            Console.WriteLine("Topornicy: " + Axe);
+            Console.WriteLine("Łucznicy: " + Archer);
+            Console.WriteLine("Zwiadowcy: " + Spy);
+            Console.WriteLine("Lekka kawaleria: " + Light);
+            Console.WriteLine("Łucznicy na koniu: " + Marcher);
+            Console.WriteLine("Ciężka kawaleria: " + Heavy);
+            Console.WriteLine("Rycerz: " + ((Knight > 0) ? "tak" : "nie"));
+            Console.WriteLine("Szlachcic: " + Snob);
+            Console.WriteLine("Katapulty: " + Catapult);
+            Console.WriteLine("Tarany: " + Ram);
+        }
     }
 
     public class VillageSummary

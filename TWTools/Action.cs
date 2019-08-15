@@ -16,6 +16,7 @@ namespace TWTools
         string Description { get; }
         DateTime Date { get; }
         string Id { get; }
+        void Display();
     }
     class SendArmy : IAction
     {
@@ -34,6 +35,20 @@ namespace TWTools
                 return HashId;
             }
         }
+
+        public void Display()
+        {
+            Console.WriteLine("Wioska źródłowa: " + Village.Name + " (" + Village.Cords.ToString() + ")");
+            Console.WriteLine("Cel: " + Cords.ToString() + "\n");
+
+            Console.WriteLine("Wojska:");
+            Army.Display();
+
+            //if (Army.Catapult > 0)
+            //    Console.WriteLine("Cel dla katapult: ");
+        }
+
+
 
         // Atak lub wsparcie
         public enum CommandType
