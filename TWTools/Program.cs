@@ -21,7 +21,7 @@ namespace TWTools
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("TWTools 1.0");
+            Console.WriteLine("TWTools 1.0.0.1");
             Console.ResetColor();
 
             string login = "", password = "", world = "", file = "";
@@ -114,6 +114,7 @@ namespace TWTools
                     Console.WriteLine("[wioski] \t - wyświetla listę wiosek");
                     Console.WriteLine("[wioska nr] \t - wybiera wioskę");
                     Console.WriteLine("[zaplanowane] \t - wyświetla zaplanowane akcje");
+                    Console.WriteLine("[akcja nr] \t - szczegółowa informacja o akcji");
                     Console.WriteLine("[planuj] \t - planuje atak/wsparcie");
                     Console.WriteLine("[usun nr] \t - usuwa zaplanowaną akcję");
                     Console.WriteLine("[cls] \t - czyści ekran");
@@ -172,13 +173,48 @@ namespace TWTools
                         Console.ResetColor();
                     }
                 }
+                else if (command.StartsWith("akcja"))
+                {
+                    if (command.Length > 6)
+                    {
+                        {
+                            int n = int.Parse(command.Substring(5));
+                            
+                            if(n > 0 && n < ActionList.Count)
+                            {
+                                ActionList[n - 1].Display();
+                            }
+                            else
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Nie ma takiej akcji");
+                                Console.ResetColor();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Nie wpisano numeru akcji");
+                        Console.ResetColor();
+                    }
+
+
+                }
                 else if (command.StartsWith("usun"))
                 {
                     if (command.Length > 6)
                     {
                         {
                             int n = int.Parse(command.Substring(5));
-                            RemoveAction(ActionList[n - 1]);
+
+
+                            if (n > 0 && n < ActionList.Count)
+                            {
+                                RemoveAction(ActionList[n - 1]);
+                            }
+
+
                         }
                     }
                     else
@@ -222,6 +258,8 @@ namespace TWTools
         {
             ActionList.Add(action);
             ProgramAction += action.Run;
+
+            ActionList.Sort((x, y) => x.Date.CompareTo(y.Date));
         }
         public static void RemoveAction(IAction action)
         {
